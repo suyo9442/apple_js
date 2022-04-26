@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="function 문법 사용법">
+    <title>level1_03</title>
+
+    <style>
+        .alert-box {
+            background: skyblue;
+            padding: 20px;
+            color: #fff;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="alert-box" id="alert">알림창임
+        <button onclick="alertHide()">닫기</button>
+    </div>
+    <button onclick="alertShow()">버튼</button>
+
+    <script>
+        function alertShow() {
+            document
+                .getElementById('alert')
+                .style
+                .display = 'block';
+        }
+        function alertHide() {
+            document
+                .getElementById('alert')
+                .style
+                .display = 'none';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="function의 파라미터 문법">
+    <title>level1_04_hw</title>
+
+    <style>
+        .alert-box {
+            background: skyblue;
+            padding: 20px;
+            color: #fff;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="alert-box" id="alert">
+        <p id="title">알림창임</p>
+        <button onclick="alertShowHide('none')">닫기</button>
+    </div>
+    <button onclick="alertShowHide('block', '아이디 입력하세요')">버튼</button>
+    <button onclick="alertShowHide('block', '비밀번호 입력하세요')">버튼</button>
+
+    <script>
+        // 파라미터를 사용하면 function을 여러개 만들 필요가 없음! 
+        function alertShowHide(구멍, t) {
+            document
+            .getElementById('alert')
+            .style
+            .display = 구멍;
+
+            document
+            .getElementById('title')
+            .innerHTML = t;
+        }
+    </script>
+</body>
