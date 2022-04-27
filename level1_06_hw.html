@@ -3,8 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="서브메뉴 만들어보기와 classList
-다루기">
+    <meta name="description" content="모달창 만들기">
 
     <!-- Bootstrap CSS -->
     <link
@@ -13,11 +12,28 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossorigin="anonymous">
 
-        <title>level1_06</title>
+        <title>level1_06_hw</title>
 
         <style>
             .list-group {display: none;}
             .show {display: block;}
+            .black-bg {
+                width: 100%;
+                height: 100%;
+                position: fixed;
+                background: rgba(0,0,0,0.5);
+                z-index: 5;
+                padding: 30px;
+
+                display: none;
+            }
+            .white-bg {
+                background: white;
+                border-radius: 5px;
+                padding: 30px;
+            }
+            /* 확장성 좋게 클래스 추가 애니메이션으로 */
+            .show_modal {display: block;}
         </style>
 </head>
 <body>
@@ -37,6 +53,15 @@
         <li class="list-group-item">And a fifth one</li>
     </ul>
 
+    <button id="login">로그인</button>
+
+    <div class="black-bg" id="modal">
+        <div class="white-bg">
+          <h4>로그인하세요</h4>
+          <button class="btn btn-danger" id="close">닫기</button>
+        </div>
+    </div> 
+
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
@@ -48,19 +73,30 @@
             document.getElementsByClassName('list-group')[0]
             .classList.toggle('show')
         })
+
+        // 모달창 띄우기
+        const login = document.querySelector('#login');
+        const modal = document.querySelector('#modal');
+        const close = document.querySelector('#close');
+        
+        // login.addEventListener('click', function(){
+        //     modal.style.display = 'block'
+        // })
+        // close.addEventListener('click', function(){
+        //     modal.style.display = 'none'
+        // })
+
+        login.addEventListener('click', function(){
+            modal.classList.add('show_modal');
+        })
+        close.addEventListener('click', function(){
+            modal.classList.remove('show_modal');
+        })
     </script>
 
 
     <!-- 
-        1. bootstrap 사용하기 
-        2. class추가하는 애니메이션 (classList.toggle/add...)
-        3. css 셀렉터 그대로 쓸 수 있는 querySelector
-             document.getElementsByClassName('list-group')[0]
-            -> document.querySelector('.list-group')
-            -> 맨 첫번 째꺼만 찾아줌
-            == document.querySelectorAll('.list-group')[0]
-        4. $('') -> 제이쿼리 함수만 붙일 수 있음
-            querySelector('') -> 자바스크립트 함수만 붙일 수 있음
+       1. 자바스크립트의 addEventListener = 제이쿼리의 on
     -->
 </body>
 </html>
