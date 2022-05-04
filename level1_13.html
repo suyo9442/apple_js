@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="변수 심화학습시간 & 저번시간 숙제">
+    <!-- Bootstrap CSS -->
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+    crossorigin="anonymous">
+
+    <style>
+        .list-group {display: none;}
+        .show {display: block;}
+        .black-bg {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            background: rgba(0,0,0,0.5);
+            z-index: 5;
+            padding: 30px;
+
+            /* opacity를 줄 때 display: none 대용 */
+            visibility: hidden;
+            opacity: 0;
+            transition: all .3s;
+        }
+        .white-bg {
+            background: white;
+            border-radius: 5px;
+            padding: 30px;
+        }
+        .show_modal {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+
+    <title>level1_13</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <span class="navbar-brand">Navbar</span>
+            <span class="badge bg-dark">Dark 🔄</span>
+            <button class="navbar-toggler" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+    <section>
+        <p>
+            light로 바꿀까요? dark로 바꿀까요?
+        </p>
+    </section>
+
+    <script>
+        var 변수; //선언
+        변수 = 'Kim'; //할당
+        변수 = 'Lee'; //재할당
+
+        function 함수() {
+            var 변수2 = 'kim'; // 범위 //function안에서만 변수2 사용 가능
+        }
+
+        // let: 재선언x, 재할당o
+        let 이름 = 'kim';
+        // let 이름; ---> 재선언(x)
+        // 똑같은 변수를 까먹고 사용하는 걸 방지
+        
+        // const: 재선언x, 재할당x
+        const 이름2 = 'kim';
+        // 이름2 = 'park' ---> 재할당(o) 
+        // 변하면 안되는 값을 보관하기 좋음
+
+    </script>
+
+    <!--
+        1. 변수의 선언, 할당, 범위
+        2. let과 const의 차이
+        - let: 재선언x, 재할당o, 범위 모든 {}
+        - const: 재선언x, 재할당x 범위 모든 {}
+        - var: 재선언o, 재할당o, 범위 function안
+    -->
+</body>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+</html>
