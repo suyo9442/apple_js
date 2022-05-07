@@ -118,21 +118,21 @@
                 container.style.transform = "translateX(0vw)";
                 index2 = 0;
             }
-            console.log(index2)
+            // console.log(index2)
         })
 
         
-        // prev.addEventListener('click', function(){
-        //     index2 -= 1;
-            
-        //     if(index2 < array) {
-        //         container.style.transform = "translateX(100vw)";
-        //         index2 = 0;
-        //         console.log(index2)
-        //     } else if (index2 > array) { 
-        //         container.style.transform = "translateX(100vw)";
-        //     }
-        // })
+        prev.addEventListener('click', function(){
+            index2 -= 1;
+
+            if(index2 >= 0) {
+                container.style.transform = "translateX(-" + index2 + "00vw)";
+            } else if (index2 <= 0) {
+                container.style.transform = "translateX(0vw)";
+                index2 = 0;
+                console.log(index2)
+            }
+        })
 
 
 
