@@ -105,7 +105,6 @@
         // })
         
 
-
         var index2 = 0;
         var array = document.querySelectorAll('.slide-box').length;
 
@@ -115,8 +114,8 @@
             if(index2 < array) { 
                 container.style.transform = "translateX(-" + index2 + "00vw)";
             } else if (index2 == array) {
-                container.style.transform = "translateX(0vw)";
                 index2 = 0;
+                container.style.transform = "translateX(-" + index2 + "00vw)";
             }
             // console.log(index2)
         })
@@ -133,9 +132,6 @@
                 console.log(index2)
             }
         })
-
-
-
     </script>
 
 

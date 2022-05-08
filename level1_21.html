@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="탭기능 만들며 배우는 for 반복문">
+    <!-- Bootstrap CSS -->
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+    crossorigin="anonymous">
+
+    <style>
+        ul.list {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            border-bottom: 1px solid #ccc;
+        }
+        ul.list::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .tab-button {
+            display: block;
+            padding: 10px 20px;
+            float: left;
+            margin-right: -1px;
+            margin-bottom: -1px;
+            color: grey;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .orange {
+            border-top: 2px solid orange;
+            border-right: 1px solid #ccc;
+            border-bottom: 1px solid white;
+            border-left: 1px solid #ccc;
+            color: black;
+            margin-top: -2px;
+        }
+        .tab-content {
+            display: none;
+            padding: 10px;
+        }
+        .show {
+            display: block;
+        }
+    </style>
+
+    <title>level1_21</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <span class="navbar-brand">Navbar</span>
+            <span class="badge bg-dark">Dark 🔄</span>
+            <button class="navbar-toggler" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="main-bg">
+        <h4>Shirts on Sale</h4>
+        <button id="login" class="btn btn-danger">로그인</button>
+    </div>
+
+    <div class="container mt-5">
+        <ul class="list">
+          <li class="tab-button">Products</li>
+          <li class="tab-button orange">Information</li>
+          <li class="tab-button">Shipping</li>
+        </ul>
+        <div class="tab-content">
+          <p>상품설명입니다. Product</p>
+        </div>
+        <div class="tab-content show">
+          <p>스펙설명입니다. Information</p>
+        </div>
+        <div class="tab-content">
+          <p>배송정보입니다. Shipping</p>
+        </div>
+      </div> 
+
+
+    <script
+        src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+    <script>
+        // 버튼 0누르면
+        /// 모든버튼에 붙은 orange 제거
+        /// 버튼0에 orange 추가
+        /// 모든 div에 show제거
+        /// div0d에 show 추가
+
+        var btn = $('.tab-button');
+        var box = $('.tab-content');
+
+        // btn.eq(0).on('click', function(){
+        //     btn.removeClass('orange');
+        //     btn.eq(0).addClass('orange');
+        //     box.removeClass('show');
+        //     box.eq(0).addClass('show');
+        // })
+        // 이걸 eq(0),eq(1), eq(2) 복붙해서 쓰는 것보다 반복문 이용하기!
+        
+
+        // 직접 그냥 해본 것~~
+        // btn.on('click', function(){
+        //     btn.removeClass('orange');
+        //     $(this).addClass('orange');
+
+        //     box.removeClass('show');
+        //     var target = $(this).index();
+        //     box.eq(target).addClass('show');
+        // })
+
+
+        //i를 0부터 시작해서 3전까지 1씩 더해주세용
+        var tabCount = btn.length;
+
+        for(let i = 0; i < tabCount; i++) {
+            // i를 출력해보면 0,1,2가 나오거등
+            // console.log(i)
+
+            //복붙 될때마다 eq()가 0,1,2로 바뀌어야함
+            btn.eq(i).on('click', function(){
+            btn.removeClass('orange');
+            btn.eq(i).addClass('orange');
+            box.removeClass('show');
+            box.eq(i).addClass('show');
+        })
+        }
+    </script>
+
+
+
+    <!--
+        1. 반복문에 var가아닌 let을 써준다
+        => 변수의 범위때문에!
+
+        2. 어떻게 하면 확장성을 키울까? 
+        (탭이 더 늘어나도 코드수정을 안해도되도록!)
+        => 저는 버튼의 총갯수를 비교연산했어용!
+
+
+        ** 좋은 코드란 뭘까?
+        - 기능구현이 잘된 코드
+        - 확장성이 좋은가?
+        - 추후 유지보수가 쉬운가
+        - 성능문제가 없는가
+    -->
+</body>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+</html>

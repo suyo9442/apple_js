@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="함수의 return 문법 & 소수점 다루기">
+    <!-- Bootstrap CSS -->
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+    crossorigin="anonymous">
+
+    <style>
+        .slide-container {
+            width: 300vw;
+            /* margin-left: -100vw; */
+
+            /* 성능으로는 transform이 좋음 */
+            transition: all 1s;
+            /* transform: translateX(-100vw); */
+        }
+        .slide-box {
+            width: 100vw;
+            float: left;
+        }
+        .slide-box img {
+            width: 100%;
+        }
+    </style>
+
+    <title>level1_19_hw</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <span class="navbar-brand">Navbar</span>
+            <span class="badge bg-dark">Dark 🔄</span>
+            <button class="navbar-toggler" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+    <div class="main-bg">
+        <h4>Shirts on Sale</h4>
+        <button id="login" class="btn btn-danger">로그인</button>
+    </div>
+
+    
+    <script>
+        // 함수에 분과 초를 차례로 파라미터로 입력하면
+        // ms단위로 바꿔서 뱉어주는 함수를 만들어봅시다
+        // 1초는 == 1000ms 입니다
+        function msChange(m, s) {
+
+            // 분과 초의 연산을 각 변수에 넣어줌
+            var mc = m * 60 * 1000; //1분 x 60초 x 1000
+            var ms = s * 1000;
+            
+            // 리턴으로 두개를 더해줌
+            return mc + ms
+        }
+
+        console.log(msChange(2, 10));
+
+        // 선생님 해설
+        function 함수(a, b) {
+            var result = (a * 60 + b) * 1000;
+            return result
+        }
+
+
+        // 가격을 파라미터에 입력하면 10%를 할인해주는 함수
+        // 첫 구매여부도 true/false로 두번 째 파라미터에 입력
+        // 첫 구매가 맞으면 추가로 1.5달라도 할인해줘야 함
+        // 주의사항: 소수점 처리
+        function sale(a, b) {
+            var paySale = a * 0.1;
+
+            if(b == true) {
+                var allSale = paySale + 1.5;
+            } else {
+                allSale = paySale + 0;
+            }
+
+            return parseFloat((a - allSale).toFixed(2))
+        }
+
+        console.log(sale(70, false))
+    </script>
+
+
+
+
+    <!--
+        1. if에 변수를 새로 선언하면 else를 명시해줘야 한다??
+    -->
+</body>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+</html>
