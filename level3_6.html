@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Select 3 : forEach, for in 반복문">
+    <!-- Bootstrap CSS -->
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+    crossorigin="anonymous">
+
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
+
+    <title>level3_6</title>
+</head>
+<body>
+    <form class="container my-5 form-group">
+        <p>상품선택</p>
+        <select class="form-select mt-2">
+          <option>모자</option>
+          <option>셔츠</option>
+          <option>바지</option>
+        </select>
+        <select class="form-select mt-2 hide">
+        </select>
+    </form>
+
+    <div class="container mt-5">
+        <ul class="list">
+          <li class="tab-button" data-id="0">Products</li>
+          <li class="tab-button orange" data-id="1">Information</li>
+          <li class="tab-button" data-id="2">Shipping</li>
+        </ul>
+        <div class="tab-content">
+          <p>상품설명입니다. Product</p>
+        </div>
+        <div class="tab-content show">
+          <p>스펙설명입니다. Information</p>
+        </div>
+        <div class="tab-content">
+          <p>배송정보입니다. Shipping</p>
+        </div>
+    </div> 
+
+
+
+
+    <script
+        src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+    <script>
+        // 바지를 선택하면 나오는 옵션을 html을 생성해서 만들기!
+        var select0 = document.querySelectorAll('.form-select')[0];
+        var select1 = document.querySelectorAll('.form-select')[1];
+
+
+        // 선생님은??? 원래 코드에서 개선해서~~~
+        // select0.addEventListener('input', function(e){
+        //     if(e.currentTarget.value == '셔츠') {
+        //         select1.classList.remove('hide');
+                
+        //         var 템플릿2 = 
+        //         `<option>95</option>
+        //         <option>100</option>`;
+        //         select1.innerHTML = '';
+        //         select1.insertAdjacentHTML('beforeend', 템플릿2);
+
+        //     } else if (e.currentTarget.value == '바지') {
+        //         select1.classList.remove('hide');
+
+        //         var 템플릿3 = 
+        //         `<option>28</option>
+        //         <option>27</option>`;
+        //         select1.innerHTML = '';
+        //         select1.insertAdjacentHTML('beforeend', 템플릿3);
+
+        //     } else {
+        //         select1.classList.add('hide');
+        //     }
+        // })
+
+
+        //서버에서 가져온 데이터라고 가정하고
+        var pants = [28, 30, 32, 34];
+        var shirts = [95, 100, 105];
+
+        //////// 그런데!! 나중에 사이즈 옵션이 늘어났을 때 어떡해??
+        //////// so, 서버에서 데이터 가져와서 그 갯수만큼 옵션 태그 만들어야함!!
+        select0.addEventListener('input', function(e){
+            if(e.currentTarget.value == '셔츠') {
+                select1.classList.remove('hide');
+                select1.innerHTML = '';
+
+                shirts.forEach(function(data){
+                    $(select1).append(`<option>${data}</option>`);
+                })
+                
+            } else if (e.currentTarget.value == '바지') {
+                select1.classList.remove('hide');
+                select1.innerHTML = '';
+
+                // 바지 데이터 갯수만큼 option생성해주세요
+                // for (var i = 0; i < pants.length; i++) {    
+                // }
+                //// for반복문 보다 간단한 for each를 써보자!
+                //array.forEach = array의 갯수만큼 반복해줄게
+                /// forEach 함수의 파라미터는 데이터들을 의미
+                pants.forEach(function(data, i){
+                    console.log(data); // 28, 30, 32, 34 하나씩 출력
+                    $(select1).append(`<option>${data}</option>`)
+
+                });
+
+            } else {
+                select1.classList.add('hide');
+            }
+        })   
+        
+        // 오브젝트도 반복문 돌릴 수 있다
+        // 오브젝트 자료 갯수만큼 반복문 돌리기
+        var obj = {name: 'kim', age: 20};
+        for (var key in obj) {
+            console.log(obj); // 오브젝트 그대로 출력
+            console.log(key); // 오브젝트 key 출력
+            console.log(obj[key]); // 오브젝트 key, value 출력
+        }
+    </script>
+
+    <!--
+        1. array에 붙일 수 있는 forEach 반복문
+        => array.forEach = array의 갯수만큼 반복해줄게
+        ** 성능은 for문이 조금 더 빠름ㅎㅎ
+        => forEach 함수의 파라미터는 데이터들을 의미
+        ==> 첫번째 인자는 pants의 데이터들
+        ==> 두 번째 인자는 0부터 1씩 증가하는 정수
+        ** 두번 째 인자를 추가하면 0, 1, 2 데이터가 출력됨
+
+
+        2. 반복문의 용도
+        1) 코드 반복
+        2) array, object 데이터 전부 꺼낼 때
+
+
+        3. function 문법 vs. arrow 문법
+        - function(){} vs. () => {}
+        - 무슨 차이? arrow를 쓰면 함수안의 this 뜻이 달라질 수 있음
+        => 함수안의 this를 e.currentTarget으로 쓰고 싶으면 function을 써야함
+    -->
+</body>                                                                 
+</html>
