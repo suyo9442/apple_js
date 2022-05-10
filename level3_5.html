@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Select 2 : 자바스크립트로 html 생성하는 법">
+    <!-- Bootstrap CSS -->
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+    crossorigin="anonymous">
+
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
+
+    <title>level3_5</title>
+</head>
+<body>
+    <form class="container my-5 form-group">
+        <p>상품선택</p>
+        <select class="form-select mt-2">
+          <option>모자</option>
+          <option>셔츠</option>
+          <option>바지</option>
+        </select>
+        <select class="form-select mt-2 hide">
+        </select>
+    </form>
+
+    <div class="container mt-5">
+        <ul class="list">
+          <li class="tab-button" data-id="0">Products</li>
+          <li class="tab-button orange" data-id="1">Information</li>
+          <li class="tab-button" data-id="2">Shipping</li>
+        </ul>
+        <div class="tab-content">
+          <p>상품설명입니다. Product</p>
+        </div>
+        <div class="tab-content show">
+          <p>스펙설명입니다. Information</p>
+        </div>
+        <div class="tab-content">
+          <p>배송정보입니다. Shipping</p>
+        </div>
+    </div> 
+
+    <div id="test">
+
+    </div>
+
+
+
+    <script
+        src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+    <script>
+        // 박스에 p태그 생성하기
+        // <p></p> 생성
+        var a = document.createElement('p');
+        // <p></p> 안에 내용 추가
+        a.innerHTML = '안녕'
+        // 박스안에 <p>안녕</p> 추가
+        document.querySelector('#test').appendChild(a)
+
+
+        // 이렇게 코드를 짜면 넘나 복잡! 그래서 간단하게...
+
+
+        var 템플릿1 = '<p>안녕</p>';
+        document.querySelector('#test').insertAdjacentHTML('beforeend', 템플릿1);
+        // 제이쿼리는~~~~
+        $('#test').append(템플릿1);
+
+
+        // 바지를 선택하면 나오는 옵션을 html을 생성해서 만들기!
+        var select0 = document.querySelectorAll('.form-select')[0];
+        var select1 = document.querySelectorAll('.form-select')[1];
+
+        // 직접 한 것
+        // console.log(select1[0])
+        // select0.addEventListener('input', function(e){
+        //     if(e.currentTarget.value == '바지') {
+        //         select1.classList.remove('hide');
+        //         select1[0].insertAdjacentHTML('beforeend', '28');
+        //         select1[1].insertAdjacentHTML('beforeend', '27');
+        //     }
+        // })
+
+
+        // 선생님은??? 원래 코드에서 개선해서~~~
+        select0.addEventListener('input', function(e){
+            if(e.currentTarget.value == '셔츠') {
+                select1.classList.remove('hide');
+                
+                var 템플릿2 = 
+                `<option>95</option>
+                <option>100</option>`;
+                select1.innerHTML = '';
+                select1.insertAdjacentHTML('beforeend', 템플릿2);
+
+            } else if (e.currentTarget.value == '바지') {
+                select1.classList.remove('hide');
+
+                var 템플릿3 = 
+                `<option>28</option>
+                <option>27</option>`;
+                select1.innerHTML = '';
+                select1.insertAdjacentHTML('beforeend', 템플릿3);
+
+            } else {
+                select1.classList.add('hide');
+            }
+        })
+    </script>
+
+    <!--
+        1. select 이벤트 확장성 개선
+        - 미리 숨겨놨다가 보여주는 방법 ==> 확장성x
+        (ex: 옷 사이즈가 항상 95, 100만 있는 건 아니니까!)
+        - 자바스크립트로 html을 생성 ==> 확장성o
+
+
+        2. 자바스크립트로 html 생성하기
+        방법1) createElement, innerHTML, appendChild
+        방법2) insertAdjacentHTML: 문자형 html 넣는 함수
+               beforeend: 안쪽맨밑
+               ex: insertAdjacentHTML('beforeend', 템플릿)
+        ** 방법2가 직관적이고 간단!!
+        ** 방법1과 2는 성능상 별차이는 없다
+
+
+        3. js의 innerHTML은 제이쿼리의 html()
+
+
+        4. 바지에서 다시 셔츠를 선택하면 변하는건??
+        => 셔츠도 바지랑 똑같이 비워주고 html생성해주면 됨
+    -->
+</body>                                                                 
+</html>

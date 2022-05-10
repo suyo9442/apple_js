@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="데이터바인딩 숙제 & 문자중간에 변수넣는 법">
+    <!-- Bootstrap CSS -->
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+    crossorigin="anonymous">
+
+    <style>
+        ul.list {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            border-bottom: 1px solid #ccc;
+        }
+        ul.list::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .tab-button {
+            display: block;
+            padding: 10px 20px;
+            float: left;
+            margin-right: -1px;
+            margin-bottom: -1px;
+            color: grey;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .orange {
+            border-top: 2px solid orange;
+            border-right: 1px solid #ccc;
+            border-bottom: 1px solid white;
+            border-left: 1px solid #ccc;
+            color: black;
+            margin-top: -2px;
+        }
+        .tab-content {
+            display: none;
+            padding: 10px;
+        }
+        .show {
+            display: block;
+        }
+    </style>
+
+    <title>level3_3</title>
+</head>
+<body>
+    <div class="card-group container">
+        <div class="card">
+          <img src="https://via.placeholder.com/600">
+          <div class="card-body">
+            <h5>Card title</h5>
+            <p>가격 : 70000</p>
+            <button class="btn btn-danger">주문하기</button>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://via.placeholder.com/600">
+          <div class="card-body">
+            <h5>Card title</h5>
+            <p>가격 : 70000</p>
+            <button class="btn btn-danger">주문하기</button>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://via.placeholder.com/600">
+          <div class="card-body">
+            <h5>Card title</h5>
+            <p>가격 : 70000</p>
+            <button class="btn btn-danger">주문하기</button>
+          </div>
+        </div>
+      </div>
+      
+
+      <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"></script>
+      <script>
+        // 카드 3개에 데이터바인딩하기!!
+        var products = [
+          { id : 0, price : 70000, title : 'Blossom Dress' },
+          { id : 1, price : 50000, title : 'Springfield Shirt' },
+          { id : 2, price : 60000, title : 'Black Monastery' }
+        ];
+
+        var title = document.querySelectorAll('.card-body h5');
+        var price = document.querySelectorAll('.card-body p');
+        var index = document.querySelectorAll('.card').length;
+
+        console.log(index);
+
+        // 첫 번째 방법: 직관적으로 꽂기
+        // title[0].innerHTML = products[0].title;
+        // title[1].innerHTML = products[1].title;
+        // title[2].innerHTML = products[2].title;
+        // price[0].innerHTML = products[0].price;
+        // price[1].innerHTML = products[1].price;
+        // price[2].innerHTML = products[2].price;
+
+
+        // 두 번째 방법: 반복문 + 직관적으로 꽂기
+        // for(let i = 0; i < index; i++) {
+        //   title[i].innerHTML = products[i].title;
+        //   price[i].innerHTML = products[i].price;
+        // }
+
+
+        // 세 번째 방법: 반복문 + 함수 축약식으로 꽂기
+        for(let i = 0; i < index; i++) {
+          데이터바인딩(i);
+        }
+        function 데이터바인딩(숫자) {
+          title[숫자].innerHTML = products[숫자].title;
+          price[숫자].innerHTML = '가격: ' + products[숫자].price;
+        }
+
+
+        // 선생님 방법은? 똑같 ㅎㅎ 
+      </script> 
+
+
+
+
+    <!--
+          1. 문자안에 변수넣기
+          => '문자' + a + '문자' 해도 되지만
+          => 백틱기호를 활용하면 더 간단!
+          ==> `문자${a}문자`
+    -->
+</body>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+</html>
