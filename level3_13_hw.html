@@ -58,7 +58,6 @@
     <div class="row">
         <h2>CART LIST</h2>
         <ul class="list">
-          <li></li>
         </ul>
     </div>
   </div> 
@@ -98,41 +97,64 @@
 
     var count = 0;
     var btn = document.querySelectorAll('.btn');
-    var card = document.querySelectorAll('.card');
+    var cart = document.querySelector('.list');
 
-    // console.log(card[1].children[1].textContent)
-    
-    for(let i = 0; i < btn.length; i++) {
-        btn[i].addEventListener('click', function(){
-          count += 1;
+    btn.forEach(function(b){
+      b.addEventListener('click', function(e){
+        // 클릭한 상품의 제목을 변수에 담자
+        let title = e.target.previousElementSibling.previousElementSibling.textContent;
 
-          if(count == 1) {
-            var arr = [];
-            arr[0] = card[i].children[1].textContent;
-            // console.log(arr)
-            
-            var newArr = JSON.stringify(arr);
-            localStorage.setItem('cart', newArr);
-            console.log(localStorage.getItem('cart'))
-          } else {
-            // arr[1] = card[i].children[1].textContent;
-            
-            // var save = localStorage.getItem('cart');
-            // JSON.parse(save);
-            // console.log(save);
-            console.log(arr[0] = card[i].children[1].textContent)
-          }
-      }) 
-    }
-    
+        // 클릭한 상품의 제목을 CART LIST에 추가하자
+        cart.insertAdjacentHTML('beforeend', `<li>${e.target.previousElementSibling.previousElementSibling.textContent}</li>`);
+      
 
+        // 만약에 이미 추가된 상품이 있으면 array를 새로 생성하지 않고 추가만 해준다
+        if(localStorage.getItem('cart') != null) {
+          //JSON형태의 array를 일반형식으로 꺼내오자
+          let 꺼내온것 = JSON.parse(localStorage.cart);
+          
+          //꺼내온것에 제목을 추가하자
+          꺼내온것.push(title);
+          
+          // JSON형태로 local에 담자
+          localStorage.setItem('cart', JSON.stringify(꺼내온것));          
+        } else {
+          // JSON형태로 local에 담자
+          localStorage.setItem('cart', JSON.stringify([title]));             
+        }
+      })
+    })
   </script>
 
 
-    <!--
-      1. 형제요소 텍스트값 가져오기
-      2. 두 번째 클릭했을 때 localStorage array 추가는?
 
+
+    <!--
+      
+
+      1. 형제요소 텍스트값 가져오기
+      => e.target.previousElementSibling.previousElementSibling.textContent
+
+
+      2. 두 번째 클릭했을 때 localStorage array 추가는?
+      => localStorage에 아무 것도 없으면 null
+
+
+      3. array를 local에 저장하려면
+      => localStorage.setItem('cart', JSON.stringify([title]));
+      ** []형태로 저장하면됨..
+
+
+      4. querySelectorAll에 이벤트걸기
+      => forEach사용
+          btn.forEach(function (b) {
+              b.addEventListener('click', function (e) {
+                  console.log(e.target);
+              })
+          })
+
+
+      ** 응용: 상품명 중복체크, 수량도 같이 올라가게 !!!!???
     -->
   </body>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 </html>
