@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="장바구니 기능과 localStorage">
+    <!-- Bootstrap CSS -->
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+    crossorigin="anonymous">
+
+    <style>
+        .card {
+          float: left;
+        }
+    </style>
+
+    <title>level3_13</title>
+</head>
+<body>
+  <div class="container">
+    <div class="rows">
+  
+        <!-- <div class="col-sm-4">
+          <img src="https://via.placeholder.com/600" class="w-100">
+          <h5>Card title</h5>
+          <p>가격 : 70000</p>
+        </div>
+   -->
+    </div>
+  </div> 
+
+  <div class="container my-3">
+    <button class="btn btn-danger" id="price">가격순정렬</button>
+  </div>
+  <div class="container my-3">
+    <button class="btn btn-danger" id="sort1">다나가순정렬</button>
+  </div>
+  <div class="container my-3">
+    <button class="btn btn-danger" id="filter">6만원이하상품</button>
+  </div>
+  <div class="container my-3">
+    <button class="btn btn-danger" id="more">더보기</button>
+  </div>
+
+
+
+  <script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+  <script>
+    var products = [
+      { id : 0, price : 70000, title : 'Blossom Dress' },
+      { id : 1, price : 50000, title : 'Springfield Shirt' },
+      { id : 2, price : 60000, title : 'Black Monastery' }
+    ];
+
+    // 선생님은 더 간단하게 하넹^_^!
+    products.forEach(function(a,i) {
+        var 템플릿 = `<div class="col-sm-4 card">
+                          <img src="https://via.placeholder.com/600" class="w-100">
+                          <h5>${a.title}</h5>
+                          <p>${a.price}</p>
+                        </div>`
+        document.querySelector('.rows').insertAdjacentHTML('beforeend', 템플릿);
+    })
+  </script>
+  
+  <!-- 더보기를 하면 상품 데이터 3개 출력하기 -->
+  <script>
+    //더보기를 하면 상품 데이터 3개 출력하기
+    var btn = document.querySelector('#more');
+    var count = 0;
+
+    // get의 url을 파라미터로 사용할 수 있는 함수 생성
+    function 템플릿생성(url) {
+      $.get(url)
+      .done(function(b){
+      b.forEach(function(c){
+          var 템플릿 = `<div class="container">
+                      <div class="col-sm-4 card">
+                        <img src="https://via.placeholder.com/600" class="w-100">
+                        <h5>${c.title}</h5>
+                        <p>${c.price}</p>
+                      </div>
+                    </div>`
+          document.querySelector('.rows').insertAdjacentHTML('beforeend', 템플릿);              
+        })
+      })
+    }
+
+    // 더보기를 또 누르면 7,8,9 상품도 출력하고 + 버튼 없애기
+    // 중복되는 함수 축약하기
+    btn.addEventListener('click', function(){
+      count += 1;
+
+      if(count == 1) {
+        템플릿생성('https://codingapple1.github.io/js/more1.json');
+      } else if (count == 2) {
+        템플릿생성('https://codingapple1.github.io/js/more2.json');
+        btn.style.display = 'none'
+      }
+    })
+  </script>
+
+  <!-- 정렬/필터 버튼 -->
+  <script>
+    /////// 역순 정렬 버튼
+
+    // 문자 역순 정렬 테스트하기
+    /// a, b
+    /// 가 다 => return 양수
+    /// 다 나 => return 음수
+    /// 가 나 => return 양수
+    var 어레이 = ['가', '다', '나'];
+    어레이.sort(function(a, b){
+      // 뒤에 오는 두번 째 글자가 더 큰 것을 양수로
+      if (a < b) {
+        return 1
+      // 뒤에 오는 두번 째 글자가 작은 것은 음수로
+      } else {
+        return -1
+      }
+    })
+
+    document.querySelector('#sort1').addEventListener('click', function(){
+        products.sort(function(a, b){
+        if (a.title < b.title) {
+          return 1
+        } else {
+          return -1
+        }
+      })
+      // html을 지우고 역순 정렬한 데이터 나열
+      document.querySelector('.rows').innerHTML = '';
+      products.forEach(function(a,i) {
+        var 템플릿 = `<div class="col-sm-4 card">
+                          <img src="https://via.placeholder.com/600" class="w-100">
+                          <h5>${a.title}</h5>
+                          <p>${a.price}</p>
+                        </div>`
+        document.querySelector('.rows').insertAdjacentHTML('beforeend', 템플릿);
+    })
+    })
+
+
+
+    /////// 6만원이하 필터 버튼
+    document.querySelector('#filter').addEventListener('click', function(){
+      // 원본을 건드리지 않고, 새로운 변수에 저장하기
+      var newProduct = products.filter(function(a){
+        return a.price <= 60000
+      })
+
+      // arrow로 쓰면
+      // var newProduct = products.filter((a) => a.price <= 60000);
+
+      // html을 지우고 필터한 데이터 나열
+      document.querySelector('.rows').innerHTML = '';
+      newProduct.forEach(function(a,i) {
+      var 템플릿 = `<div class="col-sm-4 card">
+                    <img src="https://via.placeholder.com/600" class="w-100">
+                    <h5>${a.title}</h5>
+                    <p>${a.price}</p>
+                  </div>`
+      document.querySelector('.rows').insertAdjacentHTML('beforeend', 템플릿);
+      })
+    })
+
+
+
+    /////// map : 자료를 전부 변형시켜주는 함수
+    var 어레이2 = [7, 3, 5, 2, 40]
+    var 새어레이 = 어레이.map(function(a){
+      return a * 4
+    })
+    console.log(새어레이); // 28, 12, 20, 8, 160 
+    /// map의 활용?? 환율을 곱해서 달러를 원화로 만들어 줄 수 있
+  </script>
+
+  <!-- localStorage -->
+  <script>
+    // localStorage.setItem(key, value)
+    localStorage.setItem('이름', 'kim');
+
+    // localStorage 데이터 가져오기
+    localStorage.getItem('이름');
+    console.log(localStorage.getItem('이름'));
+    
+    // localStorage 데이터 삭제하기
+    localStorage.removeItem('이름');
+    console.log(localStorage.getItem('이름'));
+
+    // localStorage 편법? array, object도 강제로 저장할 수 있음
+    localStorage.setItem('num', [1,2,3]); // 1, 2, 3 //그냥 숫자로 나옴
+    // 그래서 array를 변수로 저장하고
+    var arr = [1,2,3];
+    // JSON으로 바꿔서 저장하면됨
+    var Newarr = JSON.stringify(arr);
+    localStorage.setItem('num2', Newarr);
+    var 꺼낸거 = localStorage.getItem('num');
+
+    // JSON을 다시 array, obj로 바꾸려면
+    console.log(JSON.parse(꺼낸거)[0]);
+
+    // local을 session으로 바꿔주면 session 이용가능
+
+    // localStorage를 수정하는 함수는 따로x
+    // 때문에, value를 가져와서 추가해야함
+
+  </script>
+
+
+
+
+    <!--
+      
+      Local Storage / Session Storage (key : value 형태로 문자, 숫자 데이터 저장가능)
+      Indexed DB (크고 많은 구조화된 데이터를 DB처럼 저장가능, 문법더러움)
+      Cookies (유저 로그인정보 저장공간)
+      Cache Storage (html css js img 파일 저장해두는 공간)
+      
+      ** Local Storage / Session Storage는 5MB까지 저장가능
+      ** Local은 브라우저 재접속시 영구적으로 남아있음 (유저가 브라우저 청소하지 않는 이상)
+      ** Session 브라우저 끄면 날아감
+
+
+      * array/object -> JSON 변환하고 싶으면 
+      => JSON.stringify()
+
+      * JSON -> array/object 변환하고 싶으면 
+      => JSON.parse()
+    -->
+  </body>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+</html>
