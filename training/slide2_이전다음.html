@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <!-- <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
+    rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
+    crossorigin="anonymous"> -->
+    <style>
+        body,html {margin: 0; padding: 0;}
+        .container {
+            overflow: hidden;
+            width: 50vw;
+            height: 40vh;
+            margin: 0 auto;
+        }
+        .row {
+            width: 200vw;
+            transition: all 0.5s;
+        }
+        .slide_box {
+            width: 50vw;
+            height: 40vh;
+            float: left;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+        }
+        .slide_box:nth-child(1) {
+            background: #80d6ff;
+        }
+        .slide_box:nth-child(2) {
+            background: #42a5f5;
+        }
+        .slide_box:nth-child(3) {
+            background: #0077c2;
+        }
+        .slide_box:nth-child(4) {
+            background: #004ba0;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+        }
+        button {
+            width: 50px;
+            height: 50px;
+        }
+        button:active {
+            background: tomato;
+        }
+    </style>
+
+    <title>slide2_이전다음</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="slide_box">1</div>
+            <div class="slide_box">2</div>
+            <div class="slide_box">3</div>
+            <div class="slide_box">4</div>
+        </div>
+    </div>
+    <div class="pagination">
+        <button class="index">1</button>
+        <button class="index">2</button>
+        <button class="index">3</button>
+        <button class="index">4</button>
+        <button class="prev">&lt;</button>
+        <button class="next">&gt;</button>
+    </div>
+
+
+    <script>
+        
+        let btnIndex = document.querySelectorAll('.index');
+        let prev = document.querySelector('.prev');
+        let next = document.querySelector('.next');
+        let slideWrap = document.querySelector('.row');
+        let slide = document.querySelectorAll('.slide_box');
+        let count = 0;
+    
+        
+        for (let i = 0; i < btnIndex.length; i++) {
+            btnIndex[i].addEventListener('click', function(){
+                slideWrap.style.transform = `translateX(-${i*50}vw)`
+
+                // 카운트가 계속 유지되어야해
+                // 인덱스가 0일 때 카운트가 0
+                // 인덱스가 1일 때 카운트가 1
+                // 인덱스가 2일 때 카운트가 2
+                count = i;
+            })
+        }   
+
+        // 이전버튼을 누르면 +50
+        // 다음버튼을 누르면 -50
+        next.addEventListener('click', function(){
+            count += 1;
+
+            if (count < slide.length) {
+                slideWrap.style.transform = `translateX(-${count * 50}vw)`
+                console.log(count)
+            } else {
+                count = slide.length - 1;
+                console.log('슬라이드끝 아무것도하지마')
+            }
+        })
+
+
+        prev.addEventListener('click', function(){
+            count -= 1;
+            
+            if (count < 0) {
+                count = 0;
+                console.log('슬라이드끝 아무것도하지마')
+            } else if (count < slide.length) {
+                slideWrap.style.transform = `translateX(-${count * 50}vw)`
+                console.log(count)
+            }
+        })
+
+
+        // for (let i = 0; i < btn.length; i++) {
+        //     btn[i].addEventListener('click', function(e){
+        //         if (i == 0) {
+        //             move -= 50;
+        //             console.log(move)
+        //             slideWrap.style.transform = `translateX(-${move}vw)`
+        //         } else if (i == 1) {
+        //             move += 50;
+        //             console.log(move)
+        //             slideWrap.style.transform = `translateX(-${move}vw)`
+        //         }
+        //     })
+        // }
+        
+    </script>
+</body>
+</html>
