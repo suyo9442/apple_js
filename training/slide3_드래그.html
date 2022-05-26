@@ -147,7 +147,8 @@
             })
             slide[i].addEventListener('mousemove', function(e){
                 if (찍었니 == true) {
-                    무브좌표 = e.clientX - 다운좌표 - e.target.clientWidth;
+                    무브좌표 = (i * -window.innerWidth) + (e.clientX - 다운좌표)
+                    
                     slideWrap.style.transform = `translateX(${무브좌표}px)`;
                     console.log(무브좌표)
                 }
@@ -157,12 +158,14 @@
                 찍었니 = false;
                 console.log(i);
                 
-                if (무브좌표 > -500 && i !== 0) {
-                    slideWrap.style.transform = `translateX(-${(i - 1)*50}vw)`;
-                }
-                else if(무브좌표 < -100 && i !== 3) {
+                if (무브좌표 < -400) {
                     slideWrap.style.transform = `translateX(-${(i + 1)*50}vw)`;
-                } 
+                }
+                else if (무브좌표 > -400){
+                    slideWrap.style.transform = `translateX(-${(i - 1)*50}vw)`;
+                } else {
+                    slideWrap.style.transform = `translateX(${i * 50}vw)`;
+                }
             })
 
         }        
